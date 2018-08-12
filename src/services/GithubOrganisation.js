@@ -13,6 +13,12 @@ class GithubOrganisation {
     const rawResponse = checkStatus(await fetch(url));
     return rawResponse.json();
   }
+  async getRepositoryIssues(repoName) {
+    if (!repoName || typeof repoName !== 'string') throw new TypeError('Fn requires a non-empty string');
+    const url = `${baseUrl}/repos/${this.organisation}/${repoName}/issues?state=open`;
+    const rawResponse = checkStatus(await fetch(url));
+    return rawResponse.json();
+  }
 }
 
 export default GithubOrganisation;
